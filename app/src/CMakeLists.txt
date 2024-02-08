@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 add_library(
-        native_stuff
+        native-lib
         SHARED
-        main/cpp/native_stuff.cpp
+        main/cpp/native-lib.cpp
 )

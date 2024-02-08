@@ -1,13 +1,14 @@
 package com.example.myapplication.domain.rest
 
-import com.example.myapplication.domain.rest.intercetor.AuthInterceptor
+import com.example.myapplication.domain.rest.interceptor.AuthInterceptor
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClient {
+class ApiClient {
 
     /**
      * Simple http client
@@ -15,6 +16,7 @@ object ApiClient {
      */
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor(AuthInterceptor())
+        .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
         .build()
 
     val api = Retrofit.Builder()

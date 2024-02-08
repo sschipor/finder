@@ -3,7 +3,7 @@ package com.example.myapplication.domain.local
 class ApiKeyLocalStore {
     init {
         try {
-            System.loadLibrary("native-stuff")
+            System.loadLibrary("native-lib")
         } catch (e: Exception) {
             //ignore
         }

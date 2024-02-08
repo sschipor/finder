@@ -10,7 +10,7 @@ data class AnimalsResponseDto(
 )
 
 data class AnimalDto(
-    @SerializedName("id") val id: Int? = null,
+    @SerializedName("id") val id: Long? = null,
     @SerializedName("organization_id") val organizationId: String? = null,
     @SerializedName("url") val url: String? = null,
     @SerializedName("type") val type: String? = null,

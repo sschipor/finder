@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="login_before_proceeding">Login before proceeding</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="login_error_title">Login error</string>
+    <string name="error_general_body">Something went wrong. Please try again later</string>
+    <string name="ok_button">OK</string>
+    <string name="main_page_title">Welcome to Pet Adoption Database</string>
 </resources>

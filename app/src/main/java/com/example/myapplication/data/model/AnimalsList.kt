@@ -7,7 +7,7 @@ data class AnimalsList(
 )
 
 data class AnimalData(
-    val id: Int,
+    val id: Long,
     val url: String,
     val type: String,
     val species: String,
