@@ -11,28 +11,28 @@ import com.example.myapplication.ui.callback.PetListCallback
 
 object GeneralBinding {
     @JvmStatic
-    @BindingAdapter("itemList", "callback")
+    @BindingAdapter("itemList")
     fun setPetList(
         recyclerView: RecyclerView,
         itemsList: List<AnimalData>,
+    ) {
+        (recyclerView.adapter as? PetListAdapter)?.updateItems(itemsList)
+    }
+
+    @JvmStatic
+    @BindingAdapter("callback")
+    fun setPaginationListener(
+        recyclerView: RecyclerView,
         callback: PetListCallback
     ) {
-        var adapter = recyclerView.adapter as? PetListAdapter?
-        if (adapter == null) {
-            adapter = PetListAdapter(callback)
-            val layoutManager = LinearLayoutManager(recyclerView.context)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.adapter = adapter
-            recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    if (recyclerView.canScrollVertically(1).not()) {
-                        callback.onLoadNextPage()
-                    }
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (recyclerView.canScrollVertically(1).not()) {
+                    callback.onLoadNextPage()
                 }
-            })
-        }
-        adapter.updateItems(itemsList)
+            }
+        })
     }
 
     @JvmStatic

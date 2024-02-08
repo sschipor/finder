@@ -2,8 +2,10 @@ package com.example.myapplication.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainLayoutBinding
+import com.example.myapplication.ui.adapter.PetListAdapter
 import com.example.myapplication.ui.alert.AlertDialogUtil
 import com.example.myapplication.ui.fragment.LoginDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -17,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainLayoutBinding.inflate(layoutInflater)
         binding?.viewModel = viewModel
+        binding?.petList?.let {
+            it.layoutManager = LinearLayoutManager(this)
+            it.adapter = PetListAdapter(viewModel)
+        }
         setContentView(binding?.root)
         observeViewModel()
     }
