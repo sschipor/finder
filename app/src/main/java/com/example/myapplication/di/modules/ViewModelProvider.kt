@@ -11,10 +11,10 @@ class ViewModelProvider {
     companion object : Provider<Module> {
         override fun get(): Module = module {
             viewModel {
-                MainActivityViewModel(get(), get())
+                MainActivityViewModel(get())
             }
             viewModel {
-                LoginFragmentViewModel(get(), get())
+                LoginFragmentViewModel(get())
             }
         }
 

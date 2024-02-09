@@ -11,5 +11,5 @@ interface TheRepository {
 
     fun loginUser(): Completable
 
-    fun getAnimals(pageNo: Int): Single<AnimalsList>
+    fun getAnimals(pageNo: Int, userLocation: String?): Single<AnimalsList>
 }

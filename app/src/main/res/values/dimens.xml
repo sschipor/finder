@@ -8,4 +8,5 @@
     <dimen name="pet_item_padding">8dp</dimen>
     <dimen name="subtitle_text_size">16sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
+    <dimen name="general_radius">16dp</dimen>
 </resources>

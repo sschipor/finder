@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/pet_item_background"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_marginTop="@dimen/pet_item_padding"
         android:layout_marginBottom="@dimen/pet_item_padding"
         android:padding="@dimen/pet_item_padding">
@@ -27,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{model.smallPhoto}"/>
+            app:imageUrlRounded="@{model.smallPhoto}"/>
 
         <TextView
             android:id="@+id/pet_name"

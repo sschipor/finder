@@ -1,18 +1,22 @@
 package com.example.myapplication.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class AnimalsList(
-    val animals: List<AnimalData>,
-    val currentPage: Int,
-    val hasNextPage: Boolean,
+    val animals: List<AnimalData> = emptyList(),
+    val currentPage: Int = 1,
+    val hasNextPage: Boolean = false,
 )
 
+@Parcelize
 data class AnimalData(
     val id: Long,
     val url: String,
     val type: String,
     val species: String,
     val primaryBreed: String,
-    val isMixedBreed: Boolean,
+    val secondaryBreed: String,
     val primaryColor: String,
     val age: String,
     val gender: String,
@@ -24,4 +28,5 @@ data class AnimalData(
     val bigPhoto: String,
     val status: String,
     val publishedAt: String,
-)
+    val distance: String,
+): Parcelable

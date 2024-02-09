@@ -22,5 +22,6 @@ interface ApiInterface {
     @GET("/v2/animals")
     fun getAnimals(
         @Query("page") page: Int,
+        @Query("location") userLocation: String?,
     ): Single<AnimalsResponseDto>
 }

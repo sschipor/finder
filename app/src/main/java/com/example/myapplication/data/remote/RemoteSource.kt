@@ -19,8 +19,8 @@ internal class RemoteSource(
         ).subscribeOn(Schedulers.io())
     }
 
-    fun getAnimals(pageNo: Int): Single<AnimalsResponseDto> {
-        return apiClient.getAnimals(page = pageNo)
+    fun getAnimals(pageNo: Int, userLocation: String?): Single<AnimalsResponseDto> {
+        return apiClient.getAnimals(page = pageNo, userLocation = userLocation)
             .subscribeOn(Schedulers.io())
     }
 }

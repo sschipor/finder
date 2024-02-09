@@ -8,6 +8,7 @@ import com.example.myapplication.databinding.ActivityMainLayoutBinding
 import com.example.myapplication.ui.adapter.PetListAdapter
 import com.example.myapplication.ui.alert.AlertDialogUtil
 import com.example.myapplication.ui.fragment.LoginDialogFragment
+import com.example.myapplication.ui.fragment.PetDetailsFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainLayoutBinding.inflate(layoutInflater)
         binding?.viewModel = viewModel
-        binding?.petList?.let {
-            it.layoutManager = LinearLayoutManager(this)
-            it.adapter = PetListAdapter(viewModel)
+        binding?.petList?.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = PetListAdapter(viewModel)
         }
         setContentView(binding?.root)
         observeViewModel()
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() {
                     title = getString(R.string.login_error_title),
                     body = getString(R.string.error_general_body),
                     okButton = getString(R.string.ok_button)
+                )
+            }
+            openDetailsScreen.observeEvent(this@MainActivity) {
+                PetDetailsFragment.newInstance(it).show(
+                    supportFragmentManager, PetDetailsFragment.TAG
                 )
             }
         }

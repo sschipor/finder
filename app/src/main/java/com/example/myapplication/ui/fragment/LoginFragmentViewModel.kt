@@ -1,17 +1,15 @@
 package com.example.myapplication.ui.fragment
 
-import android.app.Application
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.repo.TheRepository
 import com.example.myapplication.event.SingleLiveEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 
 class LoginFragmentViewModel(
-    app: Application,
     private val repository: TheRepository,
-) : AndroidViewModel(app) {
+) : ViewModel() {
 
     /* Observable fields for UI */
     val isLoading = ObservableBoolean(false)

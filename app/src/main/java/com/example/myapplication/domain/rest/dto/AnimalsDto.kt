@@ -27,6 +27,7 @@ data class AnimalDto(
     @SerializedName("photos") val photos: ArrayList<PhotoDto> = arrayListOf(),
     @SerializedName("status") val status: String? = null,
     @SerializedName("published_at") val publishedAt: String? = null,
+    @SerializedName("distance") val distance: String? = null,
 )
 
 data class PhotoDto(

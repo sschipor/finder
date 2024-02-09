@@ -10,13 +10,16 @@ object AlertDialogUtil {
         title: String? = null,
         body: String,
         okButton: String,
+        cancelButton: String? = null,
         onDialogOkClick: () -> Unit = {},
+        onDialogCancelClick: () -> Unit = {},
     ) {
         AlertDialog.Builder(context)
             .apply {
                 title?.let { setTitle(it) }
                 setMessage(body)
                 setPositiveButton(okButton) { _, _ -> onDialogOkClick() }
+                cancelButton?.let { setNegativeButton(cancelButton) { _, _ -> onDialogCancelClick() } }
                 show()
             }
     }

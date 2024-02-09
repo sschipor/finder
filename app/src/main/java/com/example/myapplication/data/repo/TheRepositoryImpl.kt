@@ -26,8 +26,8 @@ internal class TheRepositoryImpl(
             }
     }
 
-    override fun getAnimals(pageNo: Int): Single<AnimalsList> {
-        return remoteSource.getAnimals(pageNo = pageNo)
+    override fun getAnimals(pageNo: Int, userLocation: String?): Single<AnimalsList> {
+        return remoteSource.getAnimals(pageNo = pageNo, userLocation = userLocation)
             .map(AnimalsDtoToDataMapper())
     }
 }

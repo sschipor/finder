@@ -21,37 +21,71 @@
             android:id="@+id/main_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/main_page_title"
             android:textColor="@color/black"
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold"
-            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/location_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/general_margin"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/location_search_hint"
+            android:imeOptions="actionDone"
+            android:onTextChanged="@{viewModel.onLocationInputChange}"
+            android:padding="@dimen/pet_item_padding"
+            android:textColor="@color/black"
+            android:textSize="@dimen/body_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pet_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/general_margin"
-            app:itemList="@{viewModel.itemsList}"
+            android:visibility="@{viewModel.isShowNoResults() ? View.GONE : View.VISIBLE}"
             app:callback="@{viewModel}"
+            app:itemList="@{viewModel.itemsList}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/main_title" />
+            app:layout_constraintTop_toBottomOf="@+id/location_search"
+            tools:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/progressBar_cyclic"
             android:layout_width="@dimen/loading_view_size"
             android:layout_height="@dimen/loading_view_size"
-            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/general_margin"
+            android:visibility="@{viewModel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/no_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/general_margin"
+            android:text="@string/no_results_text"
+            android:textColor="@color/black"
+            android:textSize="@dimen/subtitle_text_size"
+            android:textStyle="bold"
+            android:visibility="@{viewModel.isShowNoResults() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_search"
             tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

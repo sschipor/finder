@@ -1,13 +1,16 @@
 package com.example.myapplication.ui.binding
 
+import android.content.Intent
+import android.net.Uri
+import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.data.model.AnimalData
 import com.example.myapplication.ui.adapter.PetListAdapter
 import com.example.myapplication.ui.callback.PetListCallback
+
 
 object GeneralBinding {
     @JvmStatic
@@ -36,8 +39,8 @@ object GeneralBinding {
     }
 
     @JvmStatic
-    @BindingAdapter("imageUrl")
-    fun setPetImage(
+    @BindingAdapter("imageUrlRounded")
+    fun setPetImageRounded(
         imageView: ImageView,
         petImageUrl: String,
     ) {
@@ -48,4 +51,37 @@ object GeneralBinding {
             .error(android.R.drawable.stat_notify_error)
             .into(imageView)
     }
+
+    @JvmStatic
+    @BindingAdapter("imageUrlSquare")
+    fun setPetImageSquare(
+        imageView: ImageView,
+        petImageUrl: String,
+    ) {
+        Glide.with(imageView)
+            .load(petImageUrl)
+            .fallback(android.R.drawable.stat_notify_error)
+            .error(android.R.drawable.stat_notify_error)
+            .centerCrop()
+            .into(imageView)
+    }
+
+    @JvmStatic
+    @BindingAdapter("detailsHyperlink")
+    fun detailsLink(
+        button: Button,
+        link: String,
+    ) {
+        //todo will be more UX friedly to open in inner webview OR chromeTabs
+        button.setOnClickListener {
+            val webpage = Uri.parse(link)
+            val intent = Intent(Intent.ACTION_VIEW, webpage)
+            try {
+                button.context.startActivity(intent)
+            } catch (e: Exception) {
+                //no activity found to support this action
+            }
+        }
+    }
+
 }
