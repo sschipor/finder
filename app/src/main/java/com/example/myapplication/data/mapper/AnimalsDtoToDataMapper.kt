@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class AnimalsDtoToDataMapper : (AnimalsResponseDto) -> AnimalsList {
-    private val serverDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ" )
-    private val displayDateFormat = DateTimeFormatter.ofPattern("yyyy MMM d HH:mm")
+    private val serverDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+    private val displayDateFormat = DateTimeFormatter.ofPattern("yyyy MMM d HH:mm", Locale.getDefault())
     override fun invoke(dto: AnimalsResponseDto): AnimalsList {
         val publishedTime = try {
             LocalDateTime.parse("2024-02-08T13:46:51+0000", serverDateFormat)
@@ -22,14 +22,11 @@ class AnimalsDtoToDataMapper : (AnimalsResponseDto) -> AnimalsList {
                 AnimalData(
                     id = it.id ?: 0,
                     url = it.url ?: "",
-                    type = it.type ?: "N/A",
                     species = it.species ?: "N/A",
                     primaryBreed = it.breeds?.primary ?: "N/A",
                     secondaryBreed = it.breeds?.secondary ?: "N/A",
-                    primaryColor = it.colors?.primary ?: "N/A",
                     age = it.age ?: "N/A",
                     size = it.size ?: "N/A",
-                    coat = it.coat ?: "N/A",
                     name = it.name ?: "N/A",
                     description = it.description ?: "N/A",
                     smallPhoto = it.photos.firstOrNull()?.small ?: "",

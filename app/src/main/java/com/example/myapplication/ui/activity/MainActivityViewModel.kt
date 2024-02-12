@@ -83,21 +83,21 @@ class MainActivityViewModel(
                         onError.value = throwable
                     } else {
                         //if error while location search show empty list
-                        onPageFetchSuccess(animalsReponse = AnimalsList())
+                        onPageFetchSuccess(animalsResponse = AnimalsList())
                     }
                 }
             ).also { compositeDisposable.add(it) }
     }
 
-    private fun onPageFetchSuccess(animalsReponse: AnimalsList) {
+    private fun onPageFetchSuccess(animalsResponse: AnimalsList) {
         this.isLoading.set(false)
-        this.currentPageNo = animalsReponse.currentPage
-        this.hasNextPage = animalsReponse.hasNextPage
+        this.currentPageNo = animalsResponse.currentPage
+        this.hasNextPage = animalsResponse.hasNextPage
         if (currentPageNo == 1) {
             itemsList.clear()
-            isShowNoResults.set(animalsReponse.animals.isEmpty())
+            isShowNoResults.set(animalsResponse.animals.isEmpty())
         }
-        itemsList.addAll(animalsReponse.animals)
+        itemsList.addAll(animalsResponse.animals)
     }
 
     override fun onPetItemClick(animalData: AnimalData) {
@@ -105,12 +105,16 @@ class MainActivityViewModel(
     }
 
     override fun onLoadNextPage() {
+        //use location only if user has input at least 2 chars
+        val hasLocationSet = (currentLocationInput?.length ?: 0) > 1
         if (hasNextPage && isLoading.get().not()) {
             fetchList(
                 pageNo = ++currentPageNo,
-                userLocationInput = if ((currentLocationInput?.length
-                        ?: 0) > 1
-                ) currentLocationInput else null
+                userLocationInput = if (hasLocationSet) {
+                    currentLocationInput
+                } else {
+                    null
+                }
             )
         }
     }
