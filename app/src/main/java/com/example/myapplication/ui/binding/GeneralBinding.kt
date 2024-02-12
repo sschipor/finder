@@ -2,8 +2,10 @@ package com.example.myapplication.ui.binding
 
 import android.content.Intent
 import android.net.Uri
+import android.text.Html
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -72,7 +74,7 @@ object GeneralBinding {
         button: Button,
         link: String,
     ) {
-        //todo will be more UX friedly to open in inner webview OR chromeTabs
+        //todo will be more UX friendly to open in inner WebView OR chromeTabs
         button.setOnClickListener {
             val webpage = Uri.parse(link)
             val intent = Intent(Intent.ACTION_VIEW, webpage)
@@ -82,6 +84,15 @@ object GeneralBinding {
                 //no activity found to support this action
             }
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("htmlText")
+    fun setHtmlText(
+        textView: TextView,
+        text: String
+    ) {
+        textView.text = Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
     }
 
 }
